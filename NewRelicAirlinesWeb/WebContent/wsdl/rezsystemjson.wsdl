@@ -1,0 +1,348 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:ns="http://reservations.airline.newrelic.com" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://reservations.airline.newrelic.com">
+<wsdl:documentation>Please Type your service description here</wsdl:documentation>
+<wsdl:types>
+<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://reservations.airline.newrelic.com">
+<xs:element name="listReservation">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="confirmation" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listReservationResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listReservations">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="first" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="last" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listReservationsResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="makeReservation">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="firstName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="lastName" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="fromAirport" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="toAirport" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="outboundFltNum" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="departDate" nillable="true" type="xs:date"/>
+<xs:element minOccurs="0" name="returnDate" nillable="true" type="xs:date"/>
+<xs:element minOccurs="0" name="returnFltNum" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="outSeat" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="retSeat" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="outPrice" type="xs:float"/>
+<xs:element minOccurs="0" name="retPrice" type="xs:float"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="makeReservationResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelReservation">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="confirmation" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="cancelReservationResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="findAvailableFlights">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="from" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="to" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="departureDate" nillable="true" type="xs:date"/>
+<xs:element minOccurs="0" name="returnDate" nillable="true" type="xs:date"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="findAvailableFlightsResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="getCitiesServed">
+<xs:complexType>
+<xs:sequence/>
+</xs:complexType>
+</xs:element>
+<xs:element name="getCitiesServedResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="listReservationRequest">
+<wsdl:part name="parameters" element="ns:listReservation"/>
+</wsdl:message>
+<wsdl:message name="listReservationResponse">
+<wsdl:part name="parameters" element="ns:listReservationResponse"/>
+</wsdl:message>
+<wsdl:message name="findAvailableFlightsRequest">
+<wsdl:part name="parameters" element="ns:findAvailableFlights"/>
+</wsdl:message>
+<wsdl:message name="findAvailableFlightsResponse">
+<wsdl:part name="parameters" element="ns:findAvailableFlightsResponse"/>
+</wsdl:message>
+<wsdl:message name="listReservationsRequest">
+<wsdl:part name="parameters" element="ns:listReservations"/>
+</wsdl:message>
+<wsdl:message name="listReservationsResponse">
+<wsdl:part name="parameters" element="ns:listReservationsResponse"/>
+</wsdl:message>
+<wsdl:message name="cancelReservationRequest">
+<wsdl:part name="parameters" element="ns:cancelReservation"/>
+</wsdl:message>
+<wsdl:message name="cancelReservationResponse">
+<wsdl:part name="parameters" element="ns:cancelReservationResponse"/>
+</wsdl:message>
+<wsdl:message name="makeReservationRequest">
+<wsdl:part name="parameters" element="ns:makeReservation"/>
+</wsdl:message>
+<wsdl:message name="makeReservationResponse">
+<wsdl:part name="parameters" element="ns:makeReservationResponse"/>
+</wsdl:message>
+<wsdl:message name="getCitiesServedRequest">
+<wsdl:part name="parameters" element="ns:getCitiesServed"/>
+</wsdl:message>
+<wsdl:message name="getCitiesServedResponse">
+<wsdl:part name="parameters" element="ns:getCitiesServedResponse"/>
+</wsdl:message>
+<wsdl:portType name="ReservationSystemServiceJsonPortType">
+<wsdl:operation name="listReservation">
+<wsdl:input message="ns:listReservationRequest" wsaw:Action="urn:listReservation"/>
+<wsdl:output message="ns:listReservationResponse" wsaw:Action="urn:listReservationResponse"/>
+</wsdl:operation>
+<wsdl:operation name="findAvailableFlights">
+<wsdl:input message="ns:findAvailableFlightsRequest" wsaw:Action="urn:findAvailableFlights"/>
+<wsdl:output message="ns:findAvailableFlightsResponse" wsaw:Action="urn:findAvailableFlightsResponse"/>
+</wsdl:operation>
+<wsdl:operation name="listReservations">
+<wsdl:input message="ns:listReservationsRequest" wsaw:Action="urn:listReservations"/>
+<wsdl:output message="ns:listReservationsResponse" wsaw:Action="urn:listReservationsResponse"/>
+</wsdl:operation>
+<wsdl:operation name="cancelReservation">
+<wsdl:input message="ns:cancelReservationRequest" wsaw:Action="urn:cancelReservation"/>
+<wsdl:output message="ns:cancelReservationResponse" wsaw:Action="urn:cancelReservationResponse"/>
+</wsdl:operation>
+<wsdl:operation name="makeReservation">
+<wsdl:input message="ns:makeReservationRequest" wsaw:Action="urn:makeReservation"/>
+<wsdl:output message="ns:makeReservationResponse" wsaw:Action="urn:makeReservationResponse"/>
+</wsdl:operation>
+<wsdl:operation name="getCitiesServed">
+<wsdl:input message="ns:getCitiesServedRequest" wsaw:Action="urn:getCitiesServed"/>
+<wsdl:output message="ns:getCitiesServedResponse" wsaw:Action="urn:getCitiesServedResponse"/>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="ReservationSystemServiceJsonSoap11Binding" type="ns:ReservationSystemServiceJsonPortType">
+<soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="listReservation">
+<soap:operation soapAction="urn:listReservation" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="findAvailableFlights">
+<soap:operation soapAction="urn:findAvailableFlights" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="listReservations">
+<soap:operation soapAction="urn:listReservations" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cancelReservation">
+<soap:operation soapAction="urn:cancelReservation" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="makeReservation">
+<soap:operation soapAction="urn:makeReservation" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCitiesServed">
+<soap:operation soapAction="urn:getCitiesServed" style="document"/>
+<wsdl:input>
+<soap:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ReservationSystemServiceJsonSoap12Binding" type="ns:ReservationSystemServiceJsonPortType">
+<soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<wsdl:operation name="listReservation">
+<soap12:operation soapAction="urn:listReservation" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="findAvailableFlights">
+<soap12:operation soapAction="urn:findAvailableFlights" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="listReservations">
+<soap12:operation soapAction="urn:listReservations" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cancelReservation">
+<soap12:operation soapAction="urn:cancelReservation" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="makeReservation">
+<soap12:operation soapAction="urn:makeReservation" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCitiesServed">
+<soap12:operation soapAction="urn:getCitiesServed" style="document"/>
+<wsdl:input>
+<soap12:body use="literal"/>
+</wsdl:input>
+<wsdl:output>
+<soap12:body use="literal"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:binding name="ReservationSystemServiceJsonHttpBinding" type="ns:ReservationSystemServiceJsonPortType">
+<http:binding verb="POST"/>
+<wsdl:operation name="listReservation">
+<http:operation location="listReservation"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="findAvailableFlights">
+<http:operation location="findAvailableFlights"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="listReservations">
+<http:operation location="listReservations"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="cancelReservation">
+<http:operation location="cancelReservation"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="makeReservation">
+<http:operation location="makeReservation"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getCitiesServed">
+<http:operation location="getCitiesServed"/>
+<wsdl:input>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:input>
+<wsdl:output>
+<mime:content type="application/xml" part="parameters"/>
+</wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="ReservationSystemServiceJson">
+<wsdl:port name="ReservationSystemServiceJsonHttpSoap11Endpoint" binding="ns:ReservationSystemServiceJsonSoap11Binding">
+<soap:address location="http://doug-hp:8080/NewRelicAirlinesWeb/services/ReservationSystemServiceJson.ReservationSystemServiceJsonHttpSoap11Endpoint/"/>
+</wsdl:port>
+<wsdl:port name="ReservationSystemServiceJsonHttpSoap12Endpoint" binding="ns:ReservationSystemServiceJsonSoap12Binding">
+<soap12:address location="http://doug-hp:8080/NewRelicAirlinesWeb/services/ReservationSystemServiceJson.ReservationSystemServiceJsonHttpSoap12Endpoint/"/>
+</wsdl:port>
+<wsdl:port name="ReservationSystemServiceJsonHttpEndpoint" binding="ns:ReservationSystemServiceJsonHttpBinding">
+<http:address location="http://doug-hp:8080/NewRelicAirlinesWeb/services/ReservationSystemServiceJson.ReservationSystemServiceJsonHttpEndpoint/"/>
+</wsdl:port>
+</wsdl:service>
+</wsdl:definitions>
