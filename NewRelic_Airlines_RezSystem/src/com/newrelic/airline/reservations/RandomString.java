@@ -2,7 +2,8 @@ package com.newrelic.airline.reservations;
 
 import java.util.Random;
 
-/*
+/**
+ * @author dhilpipre
  * Used to generate a pseduo confirmation code
  */
 public class RandomString {

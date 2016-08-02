@@ -1,27 +1,29 @@
 package com.newrelic.airline.reservations;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 import java.util.Vector;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import com.newrelic.airline.reservations.forms.Flight;
 
+/**
+ * Class used to initialize and populate the MySQL database with the initial data.
+ * @author dhilpipre
+ *
+ */
 public class CreateFlightsDB {
 
 	private static Vector<String> citiesServed;
-	private static final String scheduleFilename = "FlightSchedule.dat";
 	
 	static {
 		citiesServed = new Vector<String>();
@@ -39,32 +41,12 @@ public class CreateFlightsDB {
 	
 	private static HashMap<String, List<Flight>> flights;
 	
+	/**
+	 * method used to setup the flights and store them in a hashmap
+	 */
 	static void create() {
 		flights = new HashMap<String, List<Flight>>();
 		
-/*		String[] seats = new String[20];
-		int n = 0;
-		for(int i=1;i<6;i++) {
-			for(int j=1;j<5;j++) {
-				switch (j) {
-				case 1: 
-					seats[n++] = i + "A";
-					break;
-				case 2:
-					seats[n++] = i + "B";
-					break;
-				case 3:
-					seats[n++] = i + "C";
-					break;
-				case 4:
-					seats[n++] = i + "D";
-					break;
-				default:
-					break;
-				}
-			}
-		}
-*/		
 		ArrayList<Flight> destflights = new ArrayList<Flight>();
 		
 		Flight flight1 = new Flight();
@@ -311,6 +293,11 @@ public class CreateFlightsDB {
 		
 	}
 	
+
+	/**
+	 * Main method.  all input args are ignored
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		try {
 			CreateFlightsDB create = new CreateFlightsDB();
@@ -326,16 +313,44 @@ public class CreateFlightsDB {
 		}
 	}
 
+	/**
+	 * Called to create flights and insert them into the database
+	 * @throws IOException
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public void createFlights() throws IOException, SQLException, ClassNotFoundException {
+		// populate hashmap field with flights
 		create();
 		Class.forName ("com.mysql.jdbc.Driver");
 		MysqlDataSource ods = new MysqlDataSource();
 		
-		ods.setServerName("localhost");
-		ods.setDatabaseName("nrairlines");
-		ods.setPort(3307);
-		ods.setUser("doug");
-		ods.setPassword("9shGuxwfQcMY9G89");
+		File dbPropFile = new File("DBConfiguration.properties");
+		String serverName = "localhost";
+		String databaseName = "nrairlines";
+		int port = 3307;
+		String username = "doug";
+		String password = "doug";
+		
+		if(dbPropFile != null && dbPropFile.exists()) {
+			Properties dbProps = new Properties();
+			FileReader reader = new FileReader(dbPropFile);
+			dbProps.load(reader);
+			serverName = dbProps.getProperty("db-host", serverName);
+			databaseName = dbProps.getProperty("db-name", databaseName);
+			String portStr = dbProps.getProperty("db-port");
+			if(portStr != null && !portStr.isEmpty()) {
+				port = Integer.parseInt(portStr);
+			}
+			username = dbProps.getProperty("db-user", username);
+			password = dbProps.getProperty("db-password",password);
+		}
+		
+		ods.setServerName(serverName);
+		ods.setDatabaseName(databaseName);
+		ods.setPort(port);
+		ods.setUser(username);
+		ods.setPassword(password);
 		//conn = ods.getConnection();
 		
 		Connection connection = ods.getConnection(); //DriverManager.getConnection("jdbc:mysql://localhost/mydb");

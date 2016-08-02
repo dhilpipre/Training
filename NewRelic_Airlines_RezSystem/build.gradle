@@ -1,0 +1,30 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+
+sourceCompatibility = JavaVersion.VERSION_1_7
+targetCompatibility = JavaVersion.VERSION_1_7
+
+repositories {
+   maven {
+      url 'https://repo1.maven.org/maven2'
+   }
+   flatDir {
+       dirs 'lib'
+   }
+}
+
+group = 'com.newrelic.instrumentation'
+version = '1.0'
+
+dependencies {
+  compile fileTree(dir: 'lib', includes: ['*.jar'])
+      
+  // 3rd party jars needed to compile:
+  compile 'javax.servlet:servlet-api:2.5'
+}
+
+jar {
+  manifest {
+       attributes 'version': project.group + '.' + project.name
+  }
+}

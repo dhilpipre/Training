@@ -1,0 +1,55 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+
+sourceCompatibility = 1.7
+version = '1.0'
+
+project.webAppDirName = 'WebContent'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src'
+        }
+        resources {
+		    srcDir 'src'
+	}
+    }
+}
+
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'NewRelicAirWeb',
+                   'Implementation-Version': 1.0
+    }
+}
+
+war {
+	archiveName 'NewRelicAirlinesWeb.war'
+}
+
+repositories {
+   mavenCentral()
+   flatDir {
+       dirs 'WebContent/WEB-INF/lib'
+   }
+}
+
+dependencies {
+    compile 'javax.servlet:servlet-api:2.5'
+    compile fileTree(dir: 'WebContent/WEB-INF/lib', includes: ['*.jar'])
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+test {
+    systemProperties 'property': 'value'
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}

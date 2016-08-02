@@ -19,10 +19,22 @@ import com.newrelic.airline.reservations.pools.*;
 import com.newrelic.airline.reservations.processing.Connection;
 
 
+/**
+ * Main class that is called to start the reservation system
+ * @author dhilpipre
+ *
+ */
 public class Main {
 
+	/**
+	 * Connection object that listens for incoming requests and routes them accordingly
+	 */
 	private Connection connection;
 	private long wait_period = 10000L;
+	
+	/**
+	 * port that the reservation system listens on
+	 */
 	private int listening_port = 16500;
 	private static final Logger LOG = Logger.getLogger(Main.class);
 	private static final String dbConfigFilename = "DBConfiguration.properties";
@@ -64,6 +76,10 @@ public class Main {
 //		connection.setWait_period(wait_period);
 	}
 	
+	
+	/**
+	 * Called to setup and initialize the MBeans associated with the Reservation System
+	 */
 	protected void setupMBeans() {
 		try {
 			String prefix = "com.newrelic.airlines.pools:type=RequestPool,name=";
@@ -150,27 +166,6 @@ public class Main {
 				}
 			}
 		
-			
-/*			CancellationRequestPool cPool = CancellationRequestPool.getInstance();
-			RequestPool cPoolBean = new RequestPool(cPool);
-			ObjectName oname1 = new ObjectName(prefix+cPool.getClass().getSimpleName());
-			server.registerMBean(cPoolBean, oname1);
-			
-			FlightSearchRequestPool fsPool = FlightSearchRequestPool.getInstance();
-			RequestPool fsPoolBean = new RequestPool(fsPool);
-			ObjectName oname2 = new ObjectName(prefix+fsPool.getClass().getSimpleName());
-			server.registerMBean(fsPoolBean, oname2);
-
-			ReservationRequestPool rPool = ReservationRequestPool.getInstance();
-			RequestPool rPoolBean = new RequestPool(rPool);
-			ObjectName oname3 = new ObjectName(prefix+rPool.getClass().getSimpleName());
-			server.registerMBean(rPoolBean, oname3);
-
-			RetrieveRequestPool retPool = RetrieveRequestPool.getInstance();
-			RequestPool retPoolBean = new RequestPool(retPool);
-			ObjectName oname4 = new ObjectName(prefix+retPool.getClass().getSimpleName());
-			server.registerMBean(retPoolBean, oname4);
-*/
 			WaitPeriod waitPeriod = new WaitPeriod();
 			ObjectName on = new ObjectName("com.newrelic.airlines:type=Wait,name="+waitPeriod.getClass().getSimpleName());
 			server.registerMBean(waitPeriod, on);
@@ -185,6 +180,11 @@ public class Main {
 		}
 
 	}
+	
+	
+	/**
+	 * Starts the reservation system and starts listening on the incoming request connection
+	 */
 	public void start() {
 		try {
 			connection.listen();
